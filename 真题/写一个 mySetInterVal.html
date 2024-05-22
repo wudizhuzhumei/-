@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 写一个 mySetInterVal(fn, a, b),每次间隔 a,a+b,a+2b,...,a+nb 的时间，然后写一个 myClear，停止上面的 mySetInterVal
+
+    function mySetInterVal(fn, a, b){
+      this.timer = null;
+      this.a = a;
+      this.b = b;
+      this.time = 0;
+
+      this.start = () => {
+        this.timer = setTimeout(() => {
+          fn();
+          this.start();
+          this.time++;
+        }, this.a + this.time * this.b);
+      }
+      
+      this.stop = () => {
+        clearTimeout(this.timer);
+        this.time = 0;
+      }
+    }
+
+    var a = new mySetInterVal(() => {console.log('123')}, 1000, 1000);
+    a.start();
+
+    setTimeout(() => {
+      a.stop();
+    }, 10000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="parent">
+    <div id="parent2">
+      <span id="self">事件触发target</span>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("parent").addEventListener("click", function(){
+      console.log('parent run')
+    });
+    document.getElementById("parent2").addEventListener("click", function(){
+      console.log('parent2 run')
+    });
+    document.getElementById("self").addEventListener("click", function(){
+      console.log('self run')
+    });
+  </script>
+</body>
+</html>

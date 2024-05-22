@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 类数组  是指 有length属性的对象  但不能调用数组的方法
+
+    let obj = {
+      length: 10,
+      0: 1
+    }
+
+    const arr = Array.from(obj);
+    const arr2 = Array.prototype.slice.call(obj);
+
+    console.log(arr2);
+  </script>
+</body>
+</html>

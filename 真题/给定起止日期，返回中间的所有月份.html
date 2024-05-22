@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function getMonth(
+        start = `${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
+        end = `${new Date().getFullYear()}-12`
+      ) {
+        const result = [];
+        const [startYear, startMonth] = start.split("-").map((item) => +item);
+        const [endYear, endMonth] = end.split("-").map((item) => +item);
+
+        if(startYear === endYear){
+          let start_month = startMonth;
+          while(start_month <= endMonth){
+            result.push(`${startYear}-${start_month < 10 ? `0${start_month}` : start_month}`);
+            start_month++;
+          }
+        }else if(startYear < endYear){
+
+        }
+
+        return result;
+      }
+
+      console.log(getMonth());
+    </script>
+  </body>
+</html>

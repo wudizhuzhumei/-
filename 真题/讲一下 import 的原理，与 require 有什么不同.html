@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      import和require都是JavaScript中用于导入模块的语句，但它们属于不同的模块系统，有着不同的工作原理和使用场景。
+      import 
+      import语句是ES6（ECMAScript2015）引入的一部分，用于导入ES模块。import的工作原理基于ES模块规范，支持静态导入和动态导入。
+      
+      静态导入：在文件的顶部使用import语句导入模块，这种方式在编译时就确定了依赖关系，允许进行静态分析和优化，如摇树优化（treeshaking）。
+      动态导入：使用import()函数动态导入模块，这种方式返回一个Promise对象，允许在代码执行过程中按需加载模块。
+      
+      require
+      require语句是CommonJS规范的一部分，主要用于Node.js环境中。require的工作原理基于CommonJS模块规范，它是同步的，即在导入模块时会阻塞代码的执行，直到模块被加载和解析完成。
+      
+      主要区别 
+      模块系统：import属于ES模块规范，而require属于CommonJS规范。
+      导入方式：import支持静态和动态导入，而require仅支持同步导入。
+      执行时机：import的静态导入在编译时就确定了依赖关系，而require在运行时解析依赖。
+      性能优化：由于import支持静态分析，它允许进行摇树优化等编译时优化，而require由于是运行时加载，不易进行这类优化。
+      返回值：import导入的是模块的引用，而require导入的是模块的拷贝。
+      兼容性：import是ES6的新特性，需要通过编译工具（如Babel）转换或在支持ES模块的环境中使用；require广泛用于Node.js环境，无需转换即可直接使用。
+      总的来说，import和require各有特点，适用于不同的场景和需求。随着ES模块在现代浏览器和Node.js中的支持越来越好，import的使用越来越广泛。
+    </p>
+  </body>
+</html>

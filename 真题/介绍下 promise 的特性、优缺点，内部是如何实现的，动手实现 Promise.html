@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const PENDING = "pending";
+      const FULFILLED = "fulfilled";
+      const REJECTED = "rejected";
+
+      class Promise {
+        constructor(excutor) {
+          this.status = PENDING;
+          this.value = undefined;
+          this.reason = undefined;
+          this.onFulfilledCallbacks = [];
+          this.onRejectedCallbacks = [];
+
+          const resolve = (value) => {
+            if (value instanceof Promise) {
+              return value.then(resolve, reject);
+            }
+
+            if (this.status === PENDING) {
+              this.status = FULFILLED;
+              this.value = value;
+              
+              if(this.onFulfilledCallbacks.length){
+                const callback = this.onFulfilledCallbacks.shift();
+                callback();
+              }
+            }
+          };
+
+          const reject = (reason) => {
+            if (this.status === PENDING) {
+              this.status = REJECTED;
+              this.reason = reason;
+              if(this.onRejectedCallbacks.length){
+                const callback = this.onRejectedCallbacks.shift();
+                callback();
+              }
+            }
+          };
+
+          try {
+            excutor(resolve, reject);
+          } catch (error) {
+            reject(error);
+          }
+        }
+
+        then(onFulfilled, onRejected) {
+          typeof onFulfilled !== "function"
+            ? (onFulfilled = (value) => value)
+            : null;
+          typeof onRejected !== "function"
+            ? (onRejected = (reason) => {
+                throw new Error(
+                  reason instanceof Error ? reason.message : reason
+                );
+              })
+            : null;
+          return new Promise((resolve, reject) => {
+            const resolveFn = (value) => {
+              try {
+                let x = onFulfilled(value);
+                x instanceof Promise ? x.then(resolve, reject) : resolve(x);
+              } catch (error) {
+                reject(error);
+              }
+            };
+
+            const rejectFn = (error) => {
+              try {
+                let x = onRejected(error);
+                x instanceof Promise ? x.then(resolve, reject) : resolve(x);
+              } catch (error) {
+                reject(error);
+              }
+            };
+
+            switch (this.status) {
+              case PENDING:
+                this.onFulfilledCallbacks.push(resolveFn);
+                this.onRejectedCallbacks.push(rejectFn);
+                break;
+              case FULFILLED:
+                resolveFn(this.value);
+                break;
+              case REJECTED:
+                rejectFn(this.reason);
+                break;
+            }
+          });
+        }
+      }
+
+      const p1 = new Promise((resolve, reject) => {
+        resolve(1); //同步executor测试
+      });
+
+      p1.then((res) => {
+        console.log(res);
+        return 2;
+      })
+        .then() //值穿透测试
+        .then((res) => {
+          console.log(res);
+          return new Promise((resolve, reject) => {
+            resolve(3); //返回Promise测试
+          });
+        })
+        .then((res) => {
+          console.log(res);
+          throw new Error("reject测试"); //reject测试
+        })
+        .then(
+          () => {},
+          (err) => {
+            console.log(err);
+          }
+        );
+    </script>
+  </body>
+</html>

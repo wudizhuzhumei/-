@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="fangdou">防抖</button>
+    <button id="jieliu">节流</button>
+    <script>
+      function debounce(fn, time) {
+        let timer = null;
+
+        return function () {
+          const context = this;
+          const args = arguments;
+          if (timer) {
+            clearTimeout(timer);
+          }
+          timer = setTimeout(() => {
+            fn.apply(context, arguments);
+          }, time);
+        };
+      }
+
+      function throttle(fn, delay) {
+        let last = 0;
+
+        return function () {
+          const now = Date.now();
+          if (now - last > delay) {
+            last = now;
+            fn.apply(this, arguments);
+          }
+        };
+      }
+    </script>
+    <script>
+      document.getElementById("fangdou").addEventListener(
+        "click",
+        debounce(function () {
+          console.log(this, "哈哈哈");
+        }, 1000)
+      );
+      document.getElementById("jieliu").addEventListener(
+        "click",
+        throttle(function () {
+          console.log(this, "哈哈哈");
+        }, 1000)
+      );
+    </script>
+  </body>
+</html>

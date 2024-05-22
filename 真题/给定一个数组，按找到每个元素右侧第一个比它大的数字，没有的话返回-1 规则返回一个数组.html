@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      给定一个数组，按找到每个元素右侧第一个比它大的数字，没有的话返回-1
+      规则返回一个数组
+    </title>
+  </head>
+  <body>
+    <script>
+      /*
+       *示例：
+       *给定数组：[2,6,3,8,10,9]
+       *返回数组：[6,8,8,10,-1,-1]
+       */
+      function getRightBigArray(arr){
+        const len = arr.length;
+        let pre = 0;
+
+        while(pre < len){
+          let next = pre + 1;
+          let hasBig = false;
+          while(next < len){
+            if(arr[next] > arr[pre]){
+              arr[pre] = arr[next];
+              hasBig = true;
+              break;
+            }
+            next++;
+          }
+          if(!hasBig){
+            arr[pre] = -1;
+          }
+          pre++;
+        }
+        return arr;
+      }
+
+      function getRightBigArray2(arr){
+        const stack = [];
+        const len = arr.length;
+        const result = new Array(len).fill(-1);
+        for(let i = 0; i < len; i++){
+          if(stack.length && arr[i] > arr[stack[stack.length - 1]]){
+            result[stack.pop()] = arr[i];
+          }
+          stack.push(i);
+        }
+        return result;
+      }
+
+      console.log(getRightBigArray2([2,6,3,8,10,9]))
+    </script>
+  </body>
+</html>

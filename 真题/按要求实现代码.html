@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 给两个数组 [A1,A2,B1,B2,C1,C2,D1,D2] [A,B,C,D]
+      // 输出 [A1,A2,A,B1,B2,B,C1,C2,C,D1,D2,D]
+      function positionArray(arr, order){
+        let result = [];
+        for(let item of order){
+          let arr1 = arr.filter(item1 => item1.indexOf(item) > -1);
+          result = [...result, ...arr1, item];
+        }
+        return result;
+      }
+
+      console.log(positionArray(['A1','A2','B1','B2','C1','C2','D1','D2'], ['A','B','C','D']));
+    </script>
+  </body>
+</html>

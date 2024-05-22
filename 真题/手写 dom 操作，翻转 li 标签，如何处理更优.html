@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+
+  <script>
+    function reverseLi(){
+      let lis = document.querySelectorAll('li');
+      let start = 0;
+      let end = lis.length - 1;
+      
+      while(start <= end){
+        let temp = lis[start].innerHTML;
+        lis[start].innerHTML = lis[end].innerHTML;
+        lis[end].innerHTML = temp;
+
+        start++;
+        end--;
+      }
+    }
+
+    function reverse(){
+      let ul = document.querySelector('ul');
+      const frag = document.createElement('div');
+      const liArray = Array.from(ul.querySelectorAll("li"));
+      liArray.reverse().forEach(li => {
+        frag.appendChild(li);
+      });
+      ul.appendChild(frag);
+    }
+
+    reverse();
+  </script>
+</body>
+</html>

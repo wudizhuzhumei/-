@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 可以批量请求数据，
+       * 所有的 URL 地址在 urls 参数中，
+       * 同时可以通过 max 参数控制请求的并发度，
+       * 当所有请求结束之后，需要执行 callback 回调函数。
+       * 发请求的函数可以直接使用 fetch 即可
+       */
+      function fetch(url) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(url);
+          }, Math.floor(Math.random() * 5 + 1) * 1000);
+        });
+      }
+
+      function multiFetch(urls, max, callback) {
+        const len = urls.length;
+        let index = 0;
+        let stack = 0;
+        const result = [];
+
+        let fn = (url) => {
+          console.log('fectUrl', url);
+          fetch(url)
+            .then((resp) => {
+              console.log(resp);
+              result.push(resp);
+            })
+            .finally(() => {
+              stack--;
+              if (index < len && stack < max) {
+                fn(urls[index]);
+                index++;
+                stack++;
+              }
+              if (result.length === len) {
+                callback();
+              }
+            });
+        };
+
+        while (index < len && stack < max) {
+          const url = urls[index];
+          fn(url);
+          stack++;
+          index++;
+        }
+      }
+
+      multiFetch(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], 3, () => {
+        console.log("done");
+      });
+    </script>
+  </body>
+</html>
