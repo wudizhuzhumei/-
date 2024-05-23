@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // const a = sum(0); // => a === 0
+    // const b = sum(1)(2); // => b === 3
+    // const c = sum(4)(5); // c === 9
+    // const k = sum(n1)...(nk) // k === n1 + n2 + ... + nk
+
+    function sum(number){
+      let pre = number;
+      
+      function innerSum(innerNum){
+        pre += innerNum;
+        return innerSum;
+      }
+
+      innerSum.toString = function(){
+        return pre;
+      };
+
+      return innerSum;
+    }
+
+    const b = sum(1)(2);
+
+    console.log(+b);
+  </script>
+</body>
+</html>

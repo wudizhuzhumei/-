@@ -6,6 +6,28 @@
   <title>Document</title>
 </head>
 <body>
-  
+  <script>
+    class RequestUtils{
+      async get(url, data){
+        const res = await fetch(url, {
+          method: 'get',
+          body: data,
+        });
+        return res.data;
+      }
+
+      async post(url, data){
+        const res = await fetch(url, {
+          method: 'post',
+          body: data,
+          headers:{
+            'Content-Type': 'application-json'
+          }
+        })
+      }
+    }
+
+    
+  </script>
 </body>
 </html>

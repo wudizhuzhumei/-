@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  BigInt 是一种内置对象，它提供了一种方法来表示大于 2^53 - 1 的整数。这是 JavaScript 中 Number 类型能够安全表示的最大整数。BigInt 可以表示任意大的整数，没有上限。
+
+使用场景包括：
+
+处理大整数：当你需要处理的整数超过 Number 类型的安全整数范围时，比如大数运算、加密算法中的大数处理等。
+高精度时间戳：在需要非常精确的时间戳时，比如某些性能监控场景，可能会用到 BigInt 来表示。
+大数ID操作：在处理大型数据库或需要处理大量数据的应用中，ID 值可能会超出 Number 的安全整数范围，此时可以使用 BigInt。
+金融计算：金融领域经常会涉及到非常大的数字，使用 BigInt 可以避免精度丢失的问题。
+使用 BigInt，只需在整数后面加 n，例如：
+
+const bigIntNumber = 1234567890123456789012345678901234567890n;
+需要注意的是，BigInt 不能与普通的 Number 类型直接进行算术运算，必须使用相同类型的值。
+</body>
+</html>

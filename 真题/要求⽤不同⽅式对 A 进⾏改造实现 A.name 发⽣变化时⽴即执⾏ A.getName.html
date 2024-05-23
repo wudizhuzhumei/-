@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+      	已知对象A = {name: 'sfd', getName: function(){console.log(this.name)}},
+      	现要求⽤不同⽅式对A进⾏改造实现A.name发⽣变化时⽴即执⾏A.getName
+      */
+      const A = {
+        name: "sfd",
+        getName: function () {
+          console.log(this.name);
+        },
+      };
+      // let name = 'sfd'
+      // Object.defineProperty(A, 'name', {
+      //   get(){
+      //     return name;
+      //   },
+      //   set(newName){
+      //     name = newName;
+      //     this.getName();
+      //   }
+      // })
+      
+      function defineReactive(obj, costomKey, val){
+        return new Proxy(obj, {
+          get(target, key, receiver){
+            return Reflect.get(target, key, receiver)
+          },
+          set(target, key, value, receiver){
+            let res = Reflect.set(target, key, value, receiver);
+            if(key === costomKey && typeof obj.getName === 'function' ){
+              obj.getName();
+            }
+            return res;
+          }
+        })
+      }
+      let _A = defineReactive(A, 'name', A.name);
+      _A.name = '铁牛';
+    </script>
+  </body>
+</html>

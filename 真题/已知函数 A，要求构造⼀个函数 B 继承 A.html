@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  ```js
+    function A(name) {
+      this.name = name;
+    }
+    A.prototype.getName = function () {
+      console.log(this.name);
+    };
+  ```
+
+  <script>
+    function A(name) {
+      this.name = name;
+    }
+    A.prototype.getName = function () {
+      console.log(this.name);
+    };
+
+    // function B(name){
+    //   A.call(this, name)
+    // }
+    // B.prototype = new A();
+    // B.prototype.constructor = B;
+
+    // const b = new B('tieniu');
+    // b.getName()
+
+    class B extends A{
+      constructor(name){
+        super(name)
+      }
+    }
+    const b = new B('tieniu');
+    b.getName();
+  </script>
+</body>
+</html>

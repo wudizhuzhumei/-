@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var a = {
+        name: "A",
+        fn() {
+          console.log(this.name);
+        },
+      };
+      a.fn(); // A
+      a.fn.call({ name: "B" }); // B
+      var fn1 = a.fn;
+      fn1(); // ''
+    </script>
+
+    <script>
+      let int = 1;
+      setTimeout(function () {
+        console.log(int);
+        int = 2;
+        new Promise((resolve, reject) => {
+          resolve();
+        }).then(function () {
+          console.log(int);
+          int = 7;
+        });
+        console.log(int);
+      });
+      int = 3;
+      console.log(int);
+      new Promise((resolve, reject) => {
+        console.log(int);
+        return resolve((int = 4));
+      }).then(function (res) {
+        console.log(int);
+        int = 5;
+        setTimeout(function () {
+          console.log(int);
+          int = 8;
+        });
+        return false;
+      });
+      console.log(int);
+
+      /**
+       * 3
+       * 3
+       * 3
+       * 4
+       * 4
+       * 2
+       * 2
+       * 7
+       */
+    </script>
+
+    <script>
+      function a(obj) {
+        obj.a = 2;
+        obj = { a: 3 };
+        return obj;
+      }
+      const obj = { a: 1 };
+      a(obj);
+      console.log(obj); // {a:2}
+    </script>
+  </body>
+</html>

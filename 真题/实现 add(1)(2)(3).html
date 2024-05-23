@@ -39,6 +39,45 @@
     const curriedSum = curry(sum);
 
     console.log(curriedSum(1)(2)(3));
+
+
+    /**
+     * 函数柯里化  
+     * sum(a,b,c) => curriedSum(1)(2)(3) => 最终执行的还是sum函数
+     * 
+     * 
+     * 直接实现 sum(1)(2)(3) => 1+2+3 和上边有什么区别？
+     */
+
+    function curry2(fn){
+
+      return function curried(...args){
+        if(args.length >= fn.length){
+          return fn.apply(this, args);
+        }else{
+          return function(...args2){
+            return curried.apply(this, args.concat(args2));
+          }
+        }
+      }
+    }
+
+    function sum2(number){
+      let count = number;
+      return function innerSum(innerNum){
+        count += innerNum;
+        return innerSum;
+      }
+
+      innerSum.toString = function(){
+        return count;
+      }
+
+      return innerSum;
+    }
+
+    const b = sum2(1)(2);
+    console.log(b);
   </script>
 </body>
 </html>

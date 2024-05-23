@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function getChineseNumeber(str){
+      const numberChar = {
+        '零': 0,
+        '一': 1,
+        '二': 2,
+        '三': 3,
+        '四': 4,
+        '五': 5,
+        '六': 6,
+        '七': 7,
+        '八': 8,
+        '九': 9,
+      }
+      const unitChar = {
+        '个': 1,
+        '十': 10,
+        '百': 100,
+        '千': 1000,
+        '万': 10000,
+        '亿': 100000000,
+      }
+
+      const len = str.length;
+      let number = 0;
+      let unit = 1;
+      let unitMax = 1;
+      let temp = 0;
+
+      for(let i = len - 1; i >= 0; i--){
+        const char = str[i];
+        if(char in numberChar){
+          temp += numberChar[char] * unit;
+          if(unit === 1){
+            unit = 10;
+          }
+        }else if(char in unitChar){
+          unit = unitChar[char];
+          if(unit > unitMax){
+            unitMax = unit;
+            number += temp;
+            temp = 0;
+          }
+        }
+      }
+
+      return number + temp;
+    }
+
+    // console.log(getChineseNumeber('一十二亿三千零九十六万三千八百九十七'));
+    console.log(getChineseNumeber('九十六万三千八百九十七'));
+  </script>
+</body>
+</html>

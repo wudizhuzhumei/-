@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      在 JavaScript 中，数值都是以浮点数的形式表示的，即使是整数也会被表示为浮点数。由于 JavaScript 使用 IEEE 754 标准来表示浮点数，其中使用二进制来表示小数，有些小数无法准确用二进制表示，这就导致了精度损失。
+
+      例如，计算 0.1 + 0.2，实际上应该等于 0.3，但在 JavaScript 中会得到一个近似于 0.30000000000000004 的结果。这是因为 0.1 和 0.2 在二进制表示中是无限循环的，无法完全准确表示。
+
+      为了避免 JavaScript 中的精度损失，可以考虑以下方法：
+      1. 尽量避免进行复杂的浮点数运算，尤其是对于需要高精度的计算，可以使用整数运算或者其他方式来避免精度损失。
+      2. 使用第三方库，如 Big.js 或 Decimal.js，这些库提供了更高精度的数学运算方法，可以避免 JavaScript 默认浮点数精度问题。
+      3. 对于金额等需要高精度的计算，可以将小数转化为整数，进行整数运算后再转回小数进行处理，这样可以提高计算精度。
+
+      总的来说，要遐视 JavaScript 中的精度问题，最重要的是要了解浮点数表示的特性，并采取适当的措施避免出现精度损失。
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+          在Node.js中，`module.exports`和`exports`都用于导出模块，但它们之间有一些区别：
+
+      1. **`module.exports` vs `exports`**:
+         - `module.exports`是真正用于导出模块的对象。当你导入一个模块时，实际上导入的是`module.exports`指向的对象。
+         - `exports`是`module.exports`的一个引用，方便导出多个值。默认情况下，`exports`和`module.exports`指向同一个对象。
+         - 如果你给`exports`赋值，它将不再指向`module.exports`。为了保持导出的一致性，推荐只使用`module.exports`进行模块导出，或者只向`exports`添加属性和方法，而不是重新赋值。
+         - 如果`module.exports`和`exports`同时存在，`module.exports`的导出内容会覆盖`exports`的。
+
+      ```javascript
+      // 使用module.exports导出
+      module.exports = {
+        a: 1,
+        b: 2,
+      };
+
+      // 使用exports添加导出的属性或方法
+      exports.c = 3;
+      exports.d = function() {};
+      ```
+
+      2. **`export` vs `export default`** (ES6模块):
+         - `export`用于导出模块，可以导出多个值。导入时需要使用花括号`{}`指定导入的名称。
+         - `export default`用于导出一个默认值，每个模块只能有一个`export default`。导入时不需要使用花括号，可以自由命名。
+         - 使用`export`导出的模块，导入时必须使用相同的名称，或者使用`as`关键字重命名。而`export default`导出的模块，在导入时可以使用任意名称。
+
+      ```javascript
+      // 使用export导出
+      export const e = 5;
+      export function f() {}
+
+      // 使用export default导出
+      export default function() {}
+      ```
+
+      总结：
+      - `module.exports`和`exports`用于Node.js中CommonJS模块系统的导出，主要区别在于使用方式和覆盖行为。
+      - `export`和`export default`用于ES6模块系统的导出，主要区别在于导出数量和导入方式。
+    </p>
+  </body>
+</html>
