@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function getMaxDepth(root){
+      if(typeof root !== 'object' || root === null){
+        return 0;
+      }
+      let maxDepth = 0;
+      Object.keys(root).forEach(key => {
+        if(typeof root[key] === 'object'){
+          let depth = getMaxDepth(root[key]) + 1;
+          if(depth > maxDepth){
+            maxDepth = depth;
+          }
+        }
+      });
+      return maxDepth + 1;
+    }
+
+    const obj = {
+      a: 1,
+      b: {
+        c: 2,
+        d: {
+          e: 3,
+          f: {
+            g: 4
+          }
+        }
+      }
+    }
+
+    console.log(getMaxDepth(obj));
+  </script>
+</body>
+</html>

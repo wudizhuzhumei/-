@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 静态方法
+    Array.from();
+    Array.isArray();
+
+    // 实例方法
+
+    // 不会改变原有数组
+    Array.prototype.concat(); // 合并数组
+    Array.prototype.entries(); // 返回数组迭代器对象 暂不知道在哪需要用到
+    Array.prototype.keys(); // 返回数组迭代器对象 暂不知道在哪需要用到
+    Array.prototype.values(); // 返回数组迭代器对象 暂不知道在哪需要用到
+    Array.prototype.every((item) => {return item > 1}); // 返回值 boolean 可用于判断数组内所有元素是否都满足某个条件
+    Array.prototype.some((item) => {return item > 1}); // 只要有一个满足就返回true 
+    Array.prototype.filter();
+    Array.prototype.find(() => {}); // 找到第一个满足条件的元素的值 ｜ undefined
+    Array.prototype.findIndex(() => {}); // 找到第一个满足条件的元素的索引 | -1
+    Array.prototype.flat(); // 扁平化数组
+    Array.prototype.flatMap(); // map  flat 结合
+    Array.prototype.forEach();
+    Array.prototype.indexOf();
+    Array.prototype.lastIndexOf();
+    Array.prototype.includes();
+    Array.prototype.join();
+    Array.prototype.map();
+    Array.prototype.reduce();
+    Array.prototype.reduceRight();
+    Array.prototype.slice();
+    Array.prototype.toLocaleString();
+    Array.prototype.toString();
+    
+    
+    // 会改变原有数组
+    Array.prototype.copyWithin(); // 移动数组内的元素 暂不知道什么场景需要用
+    Array.prototype.fill(); // new Array(10).fill(0)
+    Array.prototype.pop();
+    Array.prototype.shift();
+    Array.prototype.push(); 
+    Array.prototype.unshift(); 
+    Array.prototype.reverse();
+    Array.prototype.sort();
+    Array.prototype.splice();
+
+  </script>
+</body>
+</html>

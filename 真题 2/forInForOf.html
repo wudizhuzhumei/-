@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // for...of 遍历可迭代对象
+      // for...in 遍历对象key / 可迭代对象索引
+    </script>
+    <script>
+      let arr = [1, 2, 3, 4, 5];
+      let set = new Set();
+      let map = new Map();
+      set.add(1);
+      set.add(2);
+      set.add(3);
+      map.set(1, 2);
+      map.set("name", "铁牛");
+      map.set(3, 4);
+
+      // for(const item of arr){
+      //   console.log(item);
+      // }
+
+      // for(const item of set){
+      //   console.log(item);
+      // }
+
+      // for(const item in arr){
+      //   console.log(item);
+      // }
+
+      // for(const item in set){
+      //   console.log(item);
+      // }
+      for (const item of map) {
+        console.log(item);
+      }
+    </script>
+  </body>
+</html>
