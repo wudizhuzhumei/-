@@ -18,10 +18,16 @@
     });
     document.getElementById("parent2").addEventListener("click", function(){
       console.log('parent2 run')
-    });
+    }, true);
     document.getElementById("self").addEventListener("click", function(){
       console.log('self run')
     });
+    document.addEventListener('click', function(){
+      console.log('document capture');
+    }, true);
+    document.addEventListener('click', function(){
+      console.log('document bubble');
+    }, false);
   </script>
 </body>
 </html>
