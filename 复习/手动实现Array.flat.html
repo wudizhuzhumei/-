@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function flat(arr, depth) {
+        return arr.reduce((pre, cur) => {
+          return pre.concat(
+            Array.isArray(cur) && depth > 1 ? flat(cur, depth - 1) : cur
+          );
+        }, []);
+      }
+
+      // 实现 add(1)(2)(3);
+      function add(count) {
+        let num = count;
+
+        let fn = function (count2) {
+          num += count2;
+          return fn;
+        };
+
+        fn.toString = function () {
+          return num;
+        };
+
+        return fn;
+      }
+
+      // const res = add(1)(2)(3);
+      // console.log(+res);
+    </script>
+
+    <script>
+      // 数组转树
+      let input = [
+        {
+          id: 1,
+          val: "学校",
+          parentId: null,
+        },
+        {
+          id: 2,
+          val: "班级1",
+          parentId: 1,
+        },
+        {
+          id: 3,
+          val: "班级2",
+          parentId: 1,
+        },
+        {
+          id: 4,
+          val: "学生1",
+          parentId: 2,
+        },
+        {
+          id: 5,
+          val: "学生2",
+          parentId: 3,
+        },
+        {
+          id: 6,
+          val: "学生3",
+          parentId: 3,
+        },
+      ];
+      
+      function buildTree(treeNode, parentId){
+
+        let tree = {
+          id: parentId,
+          children: [],
+        };
+
+        function buid(tree, parentId){
+          for(let i = 0; i < treeNode.length; i++){
+            if(tree.children === undefined){
+              tree.children = [];
+            }
+            if(treeNode[i].parentId === tree.id){
+              buid(treeNode[i], treeNode[i].id);
+              tree.children.push(treeNode[i]);
+            }
+          }
+        }
+
+        buid(tree, parentId);
+
+        return tree;
+      }
+
+      console.log(buildTree(input, null));
+    </script>
+  </body>
+</html>

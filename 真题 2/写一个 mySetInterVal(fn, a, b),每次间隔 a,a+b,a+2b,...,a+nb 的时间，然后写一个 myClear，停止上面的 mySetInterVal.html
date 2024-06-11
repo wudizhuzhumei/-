@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>写一个 mySetInterVal(fn, a, b),每次间隔 a,a+b,a+2b,...,a+nb 的时间，然后写一个 myClear，停止上面的 mySetInterVal</title>
+</head>
+<body>
+  <script>
+    function mySetInterVal(fn, a, b){
+      this.a = a;
+      this.b = b;
+      this.time = 0;
+      this.handle = null;
+
+      this.start = () => {
+        this.handle = setTimeout(() => {
+          fn();
+          this.time++;
+          this.start();
+        }, this.a + this.time*b)
+      }
+
+      this.stop = () => {
+        clearTimeout(this.handle);
+        this.time = 0
+      }
+    }
+  </script>
+</body>
+</html>

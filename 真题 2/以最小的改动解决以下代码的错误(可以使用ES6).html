@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        name: "jsCoder",
+        skill: ["es6", "react", "angular"],
+        say: function () {
+          let obj = this;
+          for (let i = 0, len = this.skill.length; i < len; i++) {
+            
+            setTimeout(function () {
+              console.log("No." + (i + 1) + obj.name);
+              console.log(obj.skill[i]);
+              console.log("----------------");
+            }, 0);
+            
+            console.log(i + 1);
+          }
+        },
+      };
+      obj.say();
+
+      /* 
+        期望得到下面的结果
+        1
+        2
+        3
+        No.1 jsCoder
+        es6
+        ----------------
+        No.2 jsCoder
+        react
+        ----------------
+        No.3 jsCoder
+        angular
+      */
+      
+    </script>
+  </body>
+</html>

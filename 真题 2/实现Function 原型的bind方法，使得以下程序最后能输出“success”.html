@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Animal(name, color) {
+        this.name = name;
+        this.color = color;
+      }
+      Animal.prototype.say = function () {
+        return `I'm a ${this.color} ${this.name}`;
+      };
+
+      const Cat = Animal.bind(null, "cat");
+      const cat = new Cat("white");
+      
+      Function.prototype.bind = function(context, ...args){
+
+        let fn = this;
+        if(typeof fn !== 'function'){
+          throw new TypeError('Bind must be called by function');
+        }
+
+        return function bindFn(...args2){
+          return fn.apply(context, args.concat(args2));
+        }
+      }
+
+      if (
+        cat.say() === "I'm a white cat" &&
+        cat instanceof Cat &&
+        cat instanceof Animal
+      ) {
+        console.log("sunccess");
+      }
+    </script>
+  </body>
+</html>
